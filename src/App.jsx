@@ -1,8 +1,11 @@
 import React from 'react'
+import { LandingPage } from './component/LandingPage'
 
 function App() {
   return (
-    <div className='bg-amber-500'>App</div>
+   <>
+    <LandingPage />
+   </>
   )
 }
 
