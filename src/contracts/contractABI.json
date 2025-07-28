@@ -190,6 +190,19 @@
 		"inputs": [
 			{
 				"indexed": false,
+				"internalType": "string",
+				"name": "reason",
+				"type": "string"
+			}
+		],
+		"name": "DepositFailed",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
 				"internalType": "address",
 				"name": "owner",
 				"type": "address"
@@ -224,6 +237,12 @@
 				"internalType": "uint256",
 				"name": "price",
 				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "valueSent",
+				"type": "uint256"
 			}
 		],
 		"name": "MusicBought",
@@ -243,6 +262,12 @@
 				"internalType": "address",
 				"name": "creator",
 				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "valueSent",
+				"type": "uint256"
 			}
 		],
 		"name": "MusicMinted",
@@ -291,6 +316,10 @@
 		],
 		"name": "Transfer",
 		"type": "event"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "fallback"
 	},
 	{
 		"inputs": [],
@@ -364,6 +393,13 @@
 			}
 		],
 		"name": "buyMusic",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "deposit",
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
@@ -728,5 +764,9 @@
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
 	}
 ]
