@@ -4,9 +4,6 @@ import axios from 'axios';
 // Load Pinata API keys from Vite environment variables
 // const pinataApiKey = import.meta.env.VITE_PINATA_API_KEY;
 // const pinataSecretApiKey = import.meta.env.VITE_PINATA_SECRET_API_KEY;
-
-
-
 // console.log(pinataApiKey, pinataSecretApiKey); // Debugging: Check if keys are loaded correctly
 
 
