@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 import contractABI from '../contracts/contractABI.json';
 
-const contractAddress = '0xb27A31f1b0AF2946B7F582768f03239b1eC07c2c'; // Replace after deployment
+const contractAddress = '0xf67e0Cc75094eBc06cee524E13A54171165e4056'; // Replace after deployment
 
 export const mintMusic = async (signer, name, category, bannerImage, musicFile, price) => {
   const contract = new ethers.Contract(contractAddress, contractABI, signer);
