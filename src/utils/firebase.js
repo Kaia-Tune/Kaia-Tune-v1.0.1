@@ -3,7 +3,7 @@ import { getFirestore, collection, addDoc, query, where, getDocs } from 'firebas
 
 
 const firebaseConfig = {
-  
+
 };
 
 
