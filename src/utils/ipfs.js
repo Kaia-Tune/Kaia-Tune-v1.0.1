@@ -6,6 +6,8 @@ import axios from 'axios';
 // const pinataSecretApiKey = import.meta.env.VITE_PINATA_SECRET_API_KEY;
 // console.log(pinataApiKey, pinataSecretApiKey); // Debugging: Check if keys are loaded correctly
 
+const pinataApiKey = "5e8c94f6512cbe10b800";
+const pinataSecretApiKey = "94487f8b01dcba0bfba10914818c90a0922a8388e993ac267fd08ecf86c86c77";
 
 export const uploadToIPFS = async (file) => {
   // Validate environment variables

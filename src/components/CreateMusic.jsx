@@ -7,6 +7,7 @@ import { saveMusicToFirebase } from '../utils/firebase';
 import { generateMusic } from '../utils/aiMusic';
 import { toast } from 'react-toastify';
 import { Bot } from 'lucide-react';
+import { ethers } from 'ethers';
 
 const CreateMusic = () => {
   const [bannerImage, setBannerImage] = useState(null);
@@ -19,63 +20,116 @@ const CreateMusic = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const { account, signer } = useWallet();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!account || !signer) {
-      toast.error('Please connect your wallet');
-      return;
+
+  // src/components/CreateMusic.jsx
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!account || !signer) {
+    toast.error('Please connect your wallet');
+    return;
+  }
+  if (!bannerImage || !name || !category || (!musicFile && !useAI)) {
+    toast.error('Please upload a music file or generate one with AI');
+    return;
+  }
+
+  setIsGenerating(true);
+
+  try {
+    let musicFileUrl;
+    if (useAI) {
+      const generatedMusic = await generateMusic(prompt);
+      musicFileUrl = await uploadToIPFS(generatedMusic);
+    } else {
+      musicFileUrl = await uploadToIPFS(musicFile);
     }
-    if (!bannerImage || !name || !category || (!musicFile && !useAI)) {
-      toast.error('Please upload a music file or generate one with AI');
-      return;
-    }
+    const bannerImageUrl = await uploadToIPFS(bannerImage);
+    console.log('IPFS URLs:', { musicFileUrl, bannerImageUrl });
 
-    setIsGenerating(true);
+    const { tx, musicId } = await mintMusic(signer, name, category, bannerImageUrl, musicFileUrl, price); // Destructure correctly
+    await tx.wait();
 
-    try {
-      let musicFileUrl;
-      if (useAI) {
-        const generatedMusic = await generateMusic(prompt);
-        musicFileUrl = await uploadToIPFS(generatedMusic);
-      } else {
-        musicFileUrl = await uploadToIPFS(musicFile);
-      }
-      const bannerImageUrl = await uploadToIPFS(bannerImage);
-        console.log('IPFS URLs:', { musicFileUrl, bannerImageUrl }); // Debug URLs
+    const musicData = {
+      id: musicId, // Use the returned musicId
+      name,
+      category,
+      bannerImage: bannerImageUrl,
+      musicFile: musicFileUrl,
+      price: ethers.utils.parseEther(price.toString()).toString(), // Store in wei
+      creator: account,
+      owners: [account],
+      description: '',
+    };
 
-      const tx = await mintMusic(signer, name, category, bannerImageUrl, musicFileUrl, price); // price in wei
-      await tx.wait();
+    // CreateMusic.jsx
+console.log('Music data to save:', musicData);
+await saveMusicToFirebase(musicData);
+console.log('Firebase save successful');
+    // await saveMusicToFirebase(musicData);
 
-      const musicData = {
-        id: tx.hash,
-        name,
-        category,
-        bannerImage: bannerImageUrl,
-        musicFile: musicFileUrl,
-        price: parseFloat(price), // Convert to ether for display if needed
-        creator: account,
-        owners: [account],
-        description: '',
-      };
-      await saveMusicToFirebase(musicData);
-
-      toast.success('Music created and minted successfully!');
-      setBannerImage(null);
-      setName('');
-      setCategory('');
-      setMusicFile(null);
-      setPrice('');
-      setUseAI(false);
-      setPrompt('');
-    } catch (error) {
-      console.error('Submit Error:', error); // Log full stack
-      toast.error(error.message);
-    } finally {
-      setIsGenerating(false);
-    }
-  };
+    toast.success('Music created and minted successfully!');
+    setBannerImage(null);
+    setName('');
+    setCategory('');
+    setMusicFile(null);
+    setPrice('');
+    setUseAI(false);
+    setPrompt('');
+  } catch (error) {
+    console.error('Submit Error:', error);
+    toast.error(error.message || 'An unexpected error occurred');
+  } finally {
+    setIsGenerating(false);
+  }
+};
 
   // ... rest of the component
+
+
+//   // CreateMusic.jsx
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   if (!account || !signer) {
+//     toast.error('Please connect your wallet');
+//     return;
+//   }
+//   if (!bannerImage || !name || !category || (!musicFile && !useAI)) {
+//     toast.error('Please upload a music file or generate one with AI');
+//     return;
+//   }
+
+//   setIsGenerating(true);
+//   try {
+//   const { tx, musicId } = await mintMusic(signer, name, category, bannerImageUrl, musicFileUrl, price);
+//   await tx.wait();
+//   const musicData = {
+//     id: musicId,
+//     name,
+//     category,
+//     bannerImage: bannerImageUrl,
+//     musicFile: musicFileUrl,
+//     price: ethers.utils.parseEther(price.toString()),
+//     creator: account,
+//     owners: [account],
+//     description: '',
+//   };
+//   await saveMusicToFirebase(musicData);
+
+//     toast.success('Music created and minted successfully!');
+//     setBannerImage(null);
+//     setName('');
+//     setCategory('');
+//     setMusicFile(null);
+//     setPrice('');
+//     setUseAI(false);
+//     setPrompt('');
+//  } catch (error) {
+//   console.error('Submit Error:', error);
+//   toast.error(error.message || 'Minting failed');
+// } finally {
+//     setIsGenerating(false);
+//   }
+// };
 
 
   return (
