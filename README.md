@@ -54,15 +54,20 @@ Kaia Tunes uses smart contracts to enable revenue distribution fair and instant,
 
 ## FIGMA
 ![2025-07-27 10 42 56](https://github.com/user-attachments/assets/05b1d650-9897-47fa-ac7d-b1e5c737b9d2)
+https://www.figma.com/design/SVg4hLR3dUstYzo8QfpCBI/KaiaTune?node-id=1-85&t=nvCCpPxEMTMd2p7Z-1
 
 ## TWITTER HANDLE
 https://x.com/TunesKaia
 
 ## LIVE LINK
+https://kaia-tune-v1-0-1.vercel.app/
 
 ## CONTRACT ADDRESS
 0xf67e0cc75094ebc06cee524e13a54171165e4056
 
 ## PITCH DECK
+https://drive.google.com/file/d/1oc2Q-dms6oEsC6NhEDPVPoKWT5SoC2pw/view?usp=sharing
 
 ## DEMO VIDEO
+https://www.loom.com/share/5e378fcd02244212966c18a9490fdcc1?sid=8f77859d-2d88-4bec-b220-9887daa609ca
+
