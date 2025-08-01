@@ -50,7 +50,10 @@ Kaia Tunes uses smart contracts to enable revenue distribution fair and instant,
 
 
 ## FUNCTIONALITIES
-
+- Connect_Wallet
+- Create_Music
+- Explore_Marketplace
+- Explore_Rewards_Stats
 
 ## FIGMA
 ![2025-07-27 10 42 56](https://github.com/user-attachments/assets/05b1d650-9897-47fa-ac7d-b1e5c737b9d2)
