@@ -3,6 +3,7 @@
 ## OVERVIEW
 
 Kaia Tunes creates a decentralized, transparent platform to empower music content creators, engage fans and build a vibrant community. Artists can upload songs, create high-quality content potentially enhanced by AI, generate music NFTs to monetize through tokens facilitating user/fan donations and purchase, moreover fostering community engagement. 
+
 The platform is intuitive, visually appealing, and incentivizes user engagement through token based rewards and community features.
 
 ## PROBLEMS
@@ -34,7 +35,10 @@ Kaia Tunes uses smart contracts to enable revenue distribution fair and instant,
 
 - Rewards for fans, creators, and curators.
 
+
 ✨ Our market opportunity: 
+
+- A novel approach on Kaia blockchain for over 250 million users.
 
 - AI adoption in music is surging.
 
